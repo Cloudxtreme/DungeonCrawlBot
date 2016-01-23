@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Skins/Frame.xaml" />
+    <ResourceDictionary Source="/Skins/LabelSkin.xaml"/>
+    <ResourceDictionary Source="/Skins/WatermarkTextBoxSkin.xaml"/>
+    <ResourceDictionary Source="/Skins/ButtonSkin.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

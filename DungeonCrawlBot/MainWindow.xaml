@@ -1,0 +1,112 @@
+﻿<Window x:Class="DungeonCrawlBot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:WPFT="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Controls="clr-namespace:DungeonCrawlBot.Controls"
+        mc:Ignorable="d ignore"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Height="480"
+        Width="320"
+        Title="MVVM Light Application"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Skins/MainSkin.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+
+  <WrapPanel Orientation="Vertical" MouseLeftButtonDown="WrapPanel_MouseLeftButtonDown" >
+    <Controls:BorderGrid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.2*"/>
+        <RowDefinition/>
+        <RowDefinition Height="0.2*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Register"/>
+      <Grid Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <WPFT:WatermarkTextBox Watermark="Enter login" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <WPFT:WatermarkTextBox Watermark="Enter pass" Text="{Binding Pass, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+        <WPFT:WatermarkTextBox Watermark="Enter email" Text="{Binding Email}" Grid.Row="2"/>
+      </Grid>
+      <Button Command="{Binding RegAccountCommand}" Grid.Row="2" Content="Register account"/>
+    </Controls:BorderGrid>
+    <Controls:BorderGrid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.2*"/>
+        <RowDefinition/>
+        <RowDefinition Height="0.2*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Login"/>
+      <Grid Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition/>
+          <RowDefinition/>
+        </Grid.RowDefinitions>
+        <WPFT:WatermarkTextBox Watermark="Enter login" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <WPFT:WatermarkTextBox Watermark="Enter password" Text="{Binding Pass, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+      </Grid>
+      <Button Grid.Row="2" Content="Login" Command="{Binding LoginAccountCommand}"/>
+    </Controls:BorderGrid>
+    <Controls:BorderGrid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.2*"/>
+        <RowDefinition/>
+        <RowDefinition Height="0.2*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Enter game"/>
+      <WPFT:WatermarkTextBox Watermark="Enter player name" Text="{Binding PlayerName}" Grid.Row="1"/>
+      <Button Grid.Row="2" Content="Enter game"/>
+    </Controls:BorderGrid>
+    <Controls:BorderGrid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.2*"/>
+        <RowDefinition/>
+        <RowDefinition Height="0.2*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Send message"/>
+      <WPFT:WatermarkTextBox Text="{Binding ChatMessage}" Watermark="Enter message" Grid.Row="1"/>
+      <Button Content="Send message" Grid.Row="2" Command="{Binding SendChatMessageCommand}"/>
+    </Controls:BorderGrid>
+    <Controls:BorderGrid>
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition Height="0.2*"/>
+      </Grid.RowDefinitions>
+      <Label Content="Go lobby"/>
+      <Button Content="Go lobby" Command="{Binding GoLobbyCommand}" Grid.Row="1"/>
+    </Controls:BorderGrid>
+    <!--<ScrollViewer Width="200" Height="300">
+      <StackPanel>
+        <ItemsControl ItemsSource="{Binding ConsoleMessages}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border Background="LightGray" Margin="2" CornerRadius="3">
+                <TextBlock Text="{Binding Path=.}" TextWrapping="Wrap"/>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </ScrollViewer>-->
+    <ListBox ItemsSource="{Binding ConsoleMessages}" Width="200" Height="300">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </WrapPanel>
+</Window>
